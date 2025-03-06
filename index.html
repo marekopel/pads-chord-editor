@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PADS Editor</title>
+    <style>
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .black,
+        .white {
+            display: flex;
+        }
+
+        .black {
+            position: relative;
+            top: 55px;
+            left: 11px;
+        }
+
+        .key {
+            border: 1px solid #ddd;
+        }
+
+        .key.active {
+            border-color: black;
+            z-index: 1;
+        }
+
+        .black .key {
+            width: 14px;
+            margin: 3px;
+            height: 50px;
+            background-color: #ddd;
+        }
+
+        .black .key.active {
+            background-color: black;
+            z-index: 2;
+        }
+
+        .white .key {
+            width: 20px;
+            height: 80px;
+        }
+
+        .key {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .phantom {
+            visibility: hidden;
+        }
+
+        .black .note {
+            background-color: white;
+            color: black;
+            font-size: 8px;
+
+        }
+
+        .white .note {
+            background-color: black;
+            color: white;
+        }
+
+        .note {
+            font-size: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            border-radius: 5em;
+            width: 12px;
+            height: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        function n(note) {
+            $.each(note.split(" "), function(i, n) {
+                // console.log(n);
+                symbol = "";  
+                key=$(".key[note='"+n+"']");              
+                $(".note", key).remove();
+                symbol = n.substring(0, 1).toUpperCase();
+                if (n.indexOf("s") > 0) {
+                    symbol += "#";
+                }
+                $(key).append('<div class="note">' + symbol + '</div>');
+                $(key).addClass("active");
+            });
+        }
+        $(function() {
+            n("cs4 e4 gs4");
+
+            $(".key").click(function(e) {
+                e.preventDefault();
+                note = $(this).attr("note");
+                if ($(".note", this).length > 0) {
+                    $(".note", this).remove();
+                    $(this).removeClass("active");
+                } else {
+                    n(note);
+                }
+            });
+        })
+    </script>
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="piano">
+            <div class="black">
+
+                <div note="cs3" class="key"></div>
+                <div note="ds3" class="key"></div>
+                <div class="phantom key"></div>
+                <div note="fs3" class="key"></div>
+                <div note="gs3" class="key"></div>
+                <div note="b3" class="key"></div>
+                <div class="phantom key"></div>
+                <div note="cs4" class="key"></div>
+                <div note="ds4" class="key"></div>
+                <div class="phantom key"></div>
+                <div note="fs4" class="key"></div>
+                <div note="gs4" class="key"></div>
+                <div note="b4" class="key"></div>
+                <div class="phantom key"></div>
+                <div note="cs5" class="key"></div>
+                <div note="ds5" class="key"></div>
+                <div class="phantom key"></div>
+                <div note="fs5" class="key"></div>
+                <div note="gs5" class="key"></div>
+                <div note="b5" class="key"></div>
+                <div class="phantom key"></div>
+
+            </div>
+            <div class="white">
+
+                <div note="c3" class="key"></div>
+                <div note="d3" class="key"></div>
+                <div note="e3" class="key"></div>
+                <div note="f3" class="key"></div>
+                <div note="g3" class="key"></div>
+                <div note="a3" class="key"></div>
+                <div note="h3" class="key"></div>
+                <div note="c4" class="key"></div>
+                <div note="d4" class="key"></div>
+                <div note="e4" class="key"></div>
+                <div note="f4" class="key"></div>
+                <div note="g4" class="key"></div>
+                <div note="a4" class="key"></div>
+                <div note="h4" class="key"></div>
+                <div note="c5" class="key"></div>
+                <div note="d5" class="key"></div>
+                <div note="e5" class="key"></div>
+                <div note="f5" class="key"></div>
+                <div note="g5" class="key"></div>
+                <div note="a5" class="key"></div>
+                <div note="h5" class="key"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+</body>
+
+</html>
