@@ -83,14 +83,14 @@
             margin-bottom: 5px;
         }
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="jquery.min.js"></script>
 
     <script>
         function n(note) {
             $.each(note.split(" "), function(i, n) {
                 // console.log(n);
-                symbol = "";  
-                key=$(".key[note='"+n+"']");              
+                symbol = "";
+                key=$(".key[note='"+n+"']");
                 $(".note", key).remove();
                 symbol = n.substring(0, 1).toUpperCase();
                 if (n.indexOf("s") > 0) {
